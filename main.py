@@ -27,7 +27,9 @@ def generate_response(message):
 
 # geração de imagens com o OpenAi
 def generate_image(message):
-  response = openai.OpenAI.images.generate(
+  client = openai.OpenAi()
+  client.api_token = os.environ['openai_key']
+  response = client.images.generate(
     model='dall-e-3',
     prompt=message,
     size='1024x1024',
