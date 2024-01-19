@@ -3,7 +3,6 @@ from discord.ext import commands
 import os
 import random
 from keep_alive import keep_alive
-keep_alive()
 TOKEN = os.environ['key']
 
 # configuração do bot
@@ -68,4 +67,5 @@ async def avatar(ctx: commands.Context, member: discord.Member):
   await ctx.send(embed=embed)
 
 # bot sendo executado
+keep_alive()
 bot.run(TOKEN)
