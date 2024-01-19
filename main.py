@@ -2,13 +2,27 @@ import discord
 from discord.ext import commands
 import os
 import random
+import openai
 from keep_alive import keep_alive
 keep_alive()
 TOKEN = os.environ['key']
+openai.api_key = os.environ['openai_key']
 
 # configuração do bot
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='E!', intents=intents)
+
+# integração com o OpenAi
+def generate_response(message):
+  msg = [{'role': 'user', 'content': message}]
+  response = openai.ChatCompletion.create(
+    model='gpt-3.5-turbo',
+    messages=msg,
+    max_tokens=1024,
+    temperature=1
+  )
+  response_return = response.choices[0].message.content
+  return response_return
 
 # eventos
 @bot.event
@@ -66,6 +80,11 @@ async def avatar(ctx: commands.Context, member: discord.Member):
   embed = discord.Embed(title=f'{member.display_name}', color=member.color)
   embed.set_image(url=avatar)
   await ctx.send(embed=embed)
+
+@bot.command()
+async def ask(ctx: commands.Context, *, msg: str):
+  response = generate_response(msg)
+  await ctx.send(response)
 
 # bot sendo executado
 bot.run(TOKEN)
