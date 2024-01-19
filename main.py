@@ -15,7 +15,7 @@ bot = commands.Bot(command_prefix='E!', intents=intents)
 # integração com o OpenAi
 def generate_response(message):
   msg = [{'role': 'user', 'content': message}]
-  response = openai.ChatCompletion.create(
+  response = openai.chat.completions.create(
     model='gpt-3.5-turbo',
     messages=msg,
     max_tokens=1024,
