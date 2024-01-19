@@ -86,7 +86,7 @@ async def avatar(ctx: commands.Context, member: discord.Member):
 @bot.command()
 async def ask(ctx: commands.Context, *, msg: str):
   response = generate_response(msg)
-  await ctx.send(response)
+  await ctx.message.reply(response)
 
 # bot sendo executado
 bot.run(TOKEN)
