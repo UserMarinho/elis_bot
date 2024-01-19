@@ -27,14 +27,12 @@ def generate_response(message):
 
 # geração de imagens com o OpenAi
 def generate_image(message):
-  client = openai.OpenAI()
-  client.api_token = os.environ['openai_key']
-  response = client.images.generate(
+  response = openai.images.generate(
     model='dall-e-3',
     prompt=message,
     size='1024x1024',
     quality='standard',
-    n=1
+    n=1,
   )
   image_url = response.data[0].url
   return image_url
@@ -104,10 +102,10 @@ async def ask(ctx: commands.Context, *, msg: str):
 
 @bot.command()
 async def image(ctx: commands.Context, *, msg: str):
-  image_url = str(generate_image(msg))
-  embed = discord.Embed(title=f'Imagem gerada com o prompt:', color=discord.Color.blue())
-  embed.set_image(url=image_url)
-  await ctx.message.reply(embed=embed)
+  image_url = generate_image(msg)
+  #embed = discord.Embed(title=f'Imagem gerada com o prompt:', color=discord.Color.blue())
+  #embed.set_image(url=image_url)
+  await ctx.send(image_url)
 
 # bot sendo executado
 bot.run(TOKEN)
