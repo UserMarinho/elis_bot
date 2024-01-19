@@ -29,7 +29,7 @@ def generate_response(message):
 def generate_image(message):
   response = openai.images.generate(
     model='dall-e-3',
-    prompt=message,
+    prompt=f'{message}',
     size='1024x1024',
     quality='standard',
     n=1,
