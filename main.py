@@ -101,8 +101,8 @@ async def ask(ctx: commands.Context, *, msg: str):
   await ctx.message.reply(response)
 
 @bot.command()
-async def create_image(ctx: commands.Context, *, msg: str):
-  image_url = generate_image(msg)
+async def image(ctx: commands.Context, *, msg: str):
+  image_url = str(generate_image(msg))
   embed = discord.Embed(title=f'Imagem gerada com o prompt:', color=discord.Color.blue())
   embed.set_image(url=image_url)
   await ctx.message.reply(embed=embed)
