@@ -3,6 +3,7 @@ from discord.ext import commands
 import os
 import random
 from keep_alive import keep_alive
+keep_alive()
 TOKEN = os.environ['key']
 
 # configuração do bot
@@ -16,15 +17,15 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member: discord.Member):
-  if member.bot:
-    return
-  else:
-    try:
-      channel = bot.get_channel(757649361248190546)
-      rules_channel = bot.get_channel(817079518979293205)
-      await channel.send(f'Olá {member.mention}! Leia as {rules_channel.mention} e seja bem viado!')
-    except:
-      pass
+  try:
+    channel = bot.get_channel(817084528719036466)
+    rules_channel = bot.get_channel(817079518979293205)
+    embed = discord.Embed(title=f'Olá {member.mention}!', description=f'Leia as {rules_channel.mention} e seja bem viado!', color=discord.Color.green())
+    embed.set_thumbnail(url=member.avatar)
+    embed.set_image(url='https://media1.tenor.com/m/-lFV17DHQEsAAAAC/qxwaii-rem.gif')
+    await channel.send(embed=embed)
+  except:
+    pass
 
 @bot.event
 async def on_member_update(before: discord.Member, after: discord.Member):
@@ -67,5 +68,4 @@ async def avatar(ctx: commands.Context, member: discord.Member):
   await ctx.send(embed=embed)
 
 # bot sendo executado
-keep_alive()
 bot.run(TOKEN)
