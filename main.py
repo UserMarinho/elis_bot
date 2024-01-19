@@ -14,7 +14,8 @@ bot = commands.Bot(command_prefix='E!', intents=intents)
 
 # integração com o OpenAi
 def generate_response(message):
-  msg = [{'role': 'user', 'content': message}]
+  msg = [{'role': 'system', 'content': 'Você é um bot assistente do aplicativo Discord, e foi criado por Antonio Marinho Neto. Você possui uma personalidade debochada, porém amigável, e é sempre direto nas suas respostas.'},
+         {'role': 'user', 'content': message}]
   response = openai.chat.completions.create(
     model='gpt-3.5-turbo',
     messages=msg,
@@ -65,7 +66,8 @@ async def c_list(ctx: commands.Context):
   embed = discord.Embed(title='LISTA DE COMANDOS:',
   description=
 '''E!say -> para fazer o bot digitar o que você digitar
-E!avatar ->  para vizualizar a foto de perfil do amiguinho''',
+E!avatar ->  para vizualizar a foto de perfil do amiguinho
+E!ask -> para fazer uma pergunta para mim''',
   color=discord.Color.purple())
   await ctx.send(embed = embed)
 
