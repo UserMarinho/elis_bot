@@ -29,7 +29,7 @@ def generate_response(message):
 def generate_image(message):
   response = openai.images.generate(
     model='dall-e-3',
-    prompt=f'{message}',
+    prompt=message,
     size='1024x1024',
     quality='standard',
     n=1,
@@ -101,7 +101,7 @@ async def ask(ctx: commands.Context, *, msg: str):
   await ctx.message.reply(response)
 
 @bot.command()
-async def image(ctx: commands.Context, *, msg: str):
+async def crt_image(ctx: commands.Context, *, msg: str):
   image_url = generate_image(msg)
   #embed = discord.Embed(title=f'Imagem gerada com o prompt:', color=discord.Color.blue())
   #embed.set_image(url=image_url)
