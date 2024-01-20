@@ -87,7 +87,7 @@ async def avatar(ctx: commands.Context, member: discord.Member):
 async def ask(ctx: commands.Context, *, msg: str):
   channel = bot.get_channel(1198089267897978910)
   if ctx.message.channel != channel:
-    await ctx.message.reply(f'Para fazer perguntas, vá ao canal {channel.mention.}')
+    await ctx.message.reply(f'Para fazer perguntas, vá ao canal {channel.mention}')
     return
   response = generate_response(msg)
   await ctx.message.reply(response)
