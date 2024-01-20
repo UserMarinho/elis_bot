@@ -73,24 +73,33 @@ E!ask -> para fazer uma pergunta para mim''',
 
 @bot.command()
 async def say(ctx: commands.Context, *, msg):
-  await ctx.message.delete()
-  await ctx.send(msg)
+  try:
+    await ctx.message.delete()
+    await ctx.send(msg)
+  except:
+    pass
 
 @bot.command()
 async def avatar(ctx: commands.Context, member: discord.Member):
-  avatar = member.avatar
-  embed = discord.Embed(title=f'{member.display_name}', color=member.color)
-  embed.set_image(url=avatar)
-  await ctx.send(embed=embed)
+  try:
+    avatar = member.avatar
+    embed = discord.Embed(title=f'{member.display_name}', color=member.color)
+    embed.set_image(url=avatar)
+    await ctx.send(embed=embed)
+  except:
+    pass
 
 @bot.command()
 async def ask(ctx: commands.Context, *, msg: str):
-  channel = bot.get_channel(1198089267897978910)
-  if ctx.message.channel != channel:
-    await ctx.message.reply(f'Para fazer perguntas, vá ao canal {channel.mention}')
-    return
-  response = generate_response(msg)
-  await ctx.message.reply(response)
+  try:
+    channel = bot.get_channel(1198089267897978910)
+    if ctx.message.channel != channel:
+      await ctx.message.reply(f'Para fazer perguntas, vá ao canal {channel.mention}.')
+      return
+    response = generate_response(msg)
+    await ctx.message.reply(response)
+  except:
+    pass
 
 # bot sendo executado
 bot.run(TOKEN)
