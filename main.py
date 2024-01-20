@@ -25,18 +25,6 @@ def generate_response(message):
   response_return = response.choices[0].message.content
   return response_return
 
-# geração de imagens com o OpenAi
-def generate_image(message):
-  response = openai.images.generate(
-    model='dall-e-3',
-    prompt=message,
-    size='1024x1024',
-    quality='standard',
-    n=1,
-  )
-  image_url = response.data[0].url
-  return image_url
-
 # eventos
 @bot.event
 async def on_ready():
@@ -97,15 +85,12 @@ async def avatar(ctx: commands.Context, member: discord.Member):
 
 @bot.command()
 async def ask(ctx: commands.Context, *, msg: str):
+  channel = bot.get_channel(1198089267897978910)
+  if ctx.message.channel != channel:
+    await ctx.message.reply(f'Para fazer perguntas, vá ao canal {channel.mention.}')
+    return
   response = generate_response(msg)
   await ctx.message.reply(response)
-
-@bot.command()
-async def crt_image(ctx: commands.Context, *, msg: str):
-  image_url = generate_image(msg)
-  #embed = discord.Embed(title=f'Imagem gerada com o prompt:', color=discord.Color.blue())
-  #embed.set_image(url=image_url)
-  await ctx.send(image_url)
 
 # bot sendo executado
 bot.run(TOKEN)
