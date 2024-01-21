@@ -96,9 +96,8 @@ async def ask(ctx: commands.Context, *, msg: str):
     if ctx.message.channel != channel:
       await ctx.message.reply(f'Para fazer perguntas, vá ao canal {channel.mention}.')
       return
-    async with ctx.typing():
-      response = generate_response(msg)
-      await ctx.message.reply(response)
+    response = generate_response(msg)
+    await ctx.message.reply(response)
   except:
     pass
 
