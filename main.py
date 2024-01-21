@@ -98,7 +98,7 @@ async def ask(ctx: commands.Context, *, msg: str):
       return
     async with ctx.typing():
       response = generate_response(msg)
-    await ctx.message.reply(response)
+      await ctx.message.reply(response)
   except:
     pass
 
