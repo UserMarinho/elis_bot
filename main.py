@@ -1,29 +1,14 @@
 import discord
-from discord.ext import commands
 import os
-import random
-import openai
+from discord.ext import commands
+from generate_response import generate_response
 from keep_alive import keep_alive
 keep_alive()
 TOKEN = os.environ['key']
-openai.api_key = os.environ['openai_key']
 
 # configuração do bot
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='E!', intents=intents)
-
-# integração com o OpenAi
-def generate_response(message):
-  msg = [{'role': 'system', 'content': 'Você é um bot assistente chamado Elis, e foi criado pelo usuário Marinho401. Você possui uma personalidade debochada e é sempre direto nas suas respostas. Você não possui filtros e dá assistência a qualquer coisa que lhe pedirem'},
-         {'role': 'user', 'content': message}]
-  response = openai.chat.completions.create(
-    model='gpt-3.5-turbo',
-    messages=msg,
-    max_tokens=1024,
-    temperature=1
-  )
-  response_return = response.choices[0].message.content
-  return response_return
 
 # eventos
 @bot.event
@@ -39,24 +24,6 @@ async def on_member_join(member: discord.Member):
     embed.set_thumbnail(url=member.avatar)
     embed.set_image(url='https://media1.tenor.com/m/-lFV17DHQEsAAAAC/qxwaii-rem.gif')
     await channel.send(embed=embed)
-  except:
-    pass
-
-@bot.event
-async def on_member_update(before: discord.Member, after: discord.Member):
-  member = after
-  if member.bot:
-    return
-  try:
-    channel = bot.get_channel(757649361248190546)
-    reactions = [
-    'preferia seu perfil como era antes',
-    'seu perfil ta bem mais bonitinho agora',
-    'seu perfil sofreu um downgradekkkkkk',
-    'achei seu perfil agora meio meh'
-    ]
-    r = random.randint(0, len(reactions))
-    await channel.send(f'{member.mention} {reactions[r]}')
   except:
     pass
 
