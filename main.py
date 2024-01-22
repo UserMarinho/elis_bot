@@ -2,6 +2,7 @@ import discord
 import os
 from discord.ext import commands
 from generate_response import generate_response
+from generate_image import generate_image
 from keep_alive import keep_alive
 keep_alive()
 TOKEN = os.environ['key']
@@ -52,7 +53,7 @@ async def avatar(ctx: commands.Context, member: discord.Member):
     avatar = member.avatar
     embed = discord.Embed(title=f'{member.display_name}', color=member.color)
     embed.set_image(url=avatar)
-    await ctx.send(embed=embed)
+    await ctx.message.reply(embed=embed)
   except:
     pass
 
@@ -67,6 +68,16 @@ async def ask(ctx: commands.Context, *, msg: str):
     await ctx.message.reply(response)
   except:
     pass
+
+@bot.command()
+async def crt_image(ctx: commands.Context, *, msg: str):
+  try:
+    image_url = generate_image(msg)
+    embed = discord.Embed(title=f'Imagem solicitada:\n', color=discord.Color.blue())
+    embed.set_image(url=image_url)
+    await ctx.message.reply(embed=embed)
+  except:
+    await ctx.message.reply('Não foi possível gerar a imagem.')
 
 # bot sendo executado
 bot.run(TOKEN)
