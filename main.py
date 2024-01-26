@@ -33,9 +33,10 @@ async def on_member_join(member: discord.Member):
 async def c_list(ctx: commands.Context):
   embed = discord.Embed(title='LISTA DE COMANDOS:',
   description=
-'''E!say -> para fazer o bot digitar o que você digitar
-E!avatar ->  para vizualizar a foto de perfil do amiguinho
-E!ask -> para fazer uma pergunta para mim''',
+'''E!say (mensagem) -> para fazer o bot digitar o que você digitar
+E!avatar (menção do usuário) ->  para vizualizar a foto de perfil do amiguinho
+E!ask (mensagem) -> para fazer uma pergunta para mim
+E!crt_image (mensagem) -> para criar uma imagem''',
   color=discord.Color.purple())
   await ctx.send(embed = embed)
 
