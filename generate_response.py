@@ -1,7 +1,7 @@
 from openai import OpenAI
-import os
+from keys import token_openai_chat
 
-openai = OpenAI(api_key=os.environ['openai_key'])
+openai = OpenAI(api_key=token_openai_chat['TOKEN'])
 
 # integração com o OpenAi
 def generate_response(message):

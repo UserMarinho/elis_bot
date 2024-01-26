@@ -1,11 +1,11 @@
 import discord
-import os
 from discord.ext import commands
+from keys import token_bot
 from generate_response import generate_response
 from generate_image import generate_image
 from keep_alive import keep_alive
 keep_alive()
-TOKEN = os.environ['key']
+TOKEN = token_bot['TOKEN']
 
 # configuração do bot
 intents = discord.Intents.all()

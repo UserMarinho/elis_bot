@@ -1,6 +1,7 @@
 from openai import OpenAI
-import os
-openai = OpenAI(api_key = os.environ['generate_image_key'])
+from keys import token_openai_crt_image
+
+openai = OpenAI(api_key=token_openai_crt_image['TOKEN'])
 
 def generate_image(prompt):
   response = openai.images.generate(
