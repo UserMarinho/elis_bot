@@ -88,19 +88,19 @@ async def atk(ctx: commands.Context, member: discord.Member):
     dice = randint(0, 20)
     if dice == 0:
       gif = choice(failed_atk)
-      msg = 'Você falhou miseravelmente...'
+      msg = f'Você falhou miseravelmente em atacar {member.mention}...'
     elif dice < 9:
       gif = choice(weak_atk)
-      msg ='Atacou, mas foi bem fraquinho...'
+      msg = f'Você atacou {member.mention}, mas foi bem fraquinho...'
     elif dice < 19:
       gif = choice(good_atk)
-      msg = 'Você acertou um ataque potente!'
+      msg = f'Você acertou um ataque potente em {member.mention}!'
     else:
       gif = choice(accurate_atk)
       msg = 'EITA PORRA!'
     embed = discord.Embed(title=f'Dado: {dice}', description=msg, color=member.color)
     embed.set_image(url=gif)
-    await ctx.send(embed=embed)
+    await ctx.message.reply(embed=embed)
   except:
     pass
 
