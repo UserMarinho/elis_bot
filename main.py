@@ -80,5 +80,29 @@ async def crt_image(ctx: commands.Context, *, msg: str):
   except:
     await ctx.message.reply('Não foi possível gerar a imagem.')
 
+@bot.command()
+async def atk(ctx: commands.Context, member: discord.Member):
+  from random import choice, randint
+  from gifs import failed_atk, weak_atk, good_atk, accurate_atk
+  try:
+    dice = randint(0, 20)
+    if dice == 0:
+      gif = choice(failed_atk)
+      msg = 'Você falhou miseravelmente...'
+    elif dice < 9:
+      gif = choice(weak_atk)
+      msg ='Atacou, mas foi bem fraquinho...'
+    elif dice < 19:
+      gif = choice(good_atk)
+      msg = 'Você acertou um ataque potente!'
+    else:
+      gif = choice(accurate_atk)
+      msg = 'EITA PORRA!'
+    embed = discord.Embed(title=f'Dado: {dice}', description=msg, color=member.color)
+    embed.set_image(url=gif)
+    await ctx.send(embed=embed)
+  except:
+    pass
+
 # bot sendo executado
 bot.run(TOKEN)
