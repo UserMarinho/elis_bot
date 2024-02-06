@@ -85,20 +85,20 @@ async def atk(ctx: commands.Context, member: discord.Member):
   from random import choice, randint
   from gifs import failed_atk, weak_atk, good_atk, accurate_atk
   try:
-    dice = randint(0, 20)
-    if dice == 0:
+    dice = randint(1, 100)
+    if dice <= 20:
       gif = choice(failed_atk)
-      msg = f'Você falhou miseravelmente em atacar {member.mention}...'
-    elif dice < 9:
+      msg = f'Que merda de ataque é esse?'
+    elif dice <= 50:
       gif = choice(weak_atk)
-      msg = f'Você atacou {member.mention}, mas foi bem fraquinho...'
-    elif dice < 19:
+      msg = f'Ataque bem ruinzinho, mas ta valendo...'
+    elif dice <= 90:
       gif = choice(good_atk)
-      msg = f'Você acertou um ataque potente em {member.mention}!'
+      msg = f'Que ataque potente!'
     else:
       gif = choice(accurate_atk)
       msg = 'EITA PORRA!'
-    embed = discord.Embed(title=f'Dado: {dice}', description=msg, color=member.color)
+    embed = discord.Embed(title=f'{ctx.author.mention} atacou {member.mention}', description=msg, color=member.color)
     embed.set_image(url=gif)
     await ctx.message.reply(embed=embed)
   except:
