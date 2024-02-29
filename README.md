@@ -1,2 +1,2 @@
 # elis_bot
-Elis is a discord bot :)
+Elis is a discord bot
